@@ -8,7 +8,7 @@ http
       q = url.parse(addr, true),
       filepath = "";
 
-    if (q.pathname.inclues("documentation")) {
+    if (q.pathname.includes("documentation")) {
       filePath = __dirname + "/documentation.html";
     } else {
       filepath = "index.html";
