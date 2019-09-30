@@ -19,7 +19,7 @@ http
       }
       response.writeHead(200, { "Content-Type": "text/html" });
       response.write(data);
-      fs.appendFile("log.txt", "URL: " + addr + "/n" + "Timestamp: " + new Date() + "/n/n", function(err){
+      fs.appendFile("log.txt", "URL: " + addr + "\n" + "Timestamp: " + new Date() + "\n\n", function(err){
         if (err){
           console.log(err)
         } else{
