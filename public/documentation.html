@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=width-device-width, initial-scale=1" />
     <title>myFlix</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
     <h1>myFlix</h1>
@@ -12,6 +13,147 @@
       movies, directors, and genres. Users will be able to sign up, update their
       personal information, and create a list of their favorite movies!!
     </p>
+    <p>
+      The table below describes each endpoint and how to format requests to the
+      API correctly
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>URL Endpoints</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Return a list of ALL movies to the user</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about all movies, containing a
+            description, the genre, director, and image URL. Example:
+            <p>
+              { “Title”: “Silence of the Lambs”, “Description”: “A young F.B.I.
+              cadet must receive the help of an incarcerated and manipulative
+              cannibal killer to help catch another serial killer, a madman who
+              skins his victims.”, “Genre”: “Thriller”, “Director”: “Jonathan
+              Demme”, “Image URL”: silence_of_the_lambs.png}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Return data (description, genre, director, image URL, whether it’s
+            featured or not) about a single movie by title to the user
+          </td>
+          <td>/movies/[title]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about a single movie by title. Example:
+            <p>See Above</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Return data about a genre (description) by name/title (e.g.,
+            “Thriller”)
+          </td>
+          <td>/genres/[genre]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object containing a description of particular genre. Example:
+            <p>
+              {“Description”: “A thriller is a genre of literature, film, and
+              television whose primary feature is that it induces strong
+              feelings of excitement, anxiety, tension, suspense, fear, and
+              other similar emotions in its readers or viewers—in other words,
+              media that thrills the audience.”}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Return data about a director (bio, birth year, death year) by name
+          </td>
+          <td>/directors/[director]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object containing data about a single director by name.
+            Example:
+            <p>
+              {“Director”: “Jonathan Demme”, “Bio”: “American director,
+              producer, and screenwriter, etc.”, “Born”: “February 22nd, 1944”,
+              “Died”: “April 26th, 2017”}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>
+            A JSON object containing data about the new user. Example:
+            <p>
+              {"Username":"janesmith","Password":"password123","email":"jsmith@gmail.com","Date
+              of Birth":"January 1, 1985"}
+            </p>
+          </td>
+          <td>
+            A JSON object containing data about the user that was added,
+            including an ID. Example:
+            <p>
+              {“Id”:1, “Username”:”janesmith”, “Password”:”password123”,
+              “email”:”jsmith@gmail.com”, “Date of Birth”:"January 1, 1985"}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Allow users to update their user info (username, password, email,
+            date of birth)
+          </td>
+          <td>/users/[name]/[info]</td>
+          <td>PUT</td>
+          <td>None</td>
+          <td>A text message indicating the user information was updated</td>
+        </tr>
+        <tr>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/users/[name]/[favorites]</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>
+            A text message indicating the movie title was added to the user’s
+            favorites
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to remove a movie from their list of favorites</td>
+          <td>/users/[name]/[favorites]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            A text message indicating the movie titles was removed from the
+            user’s favorites
+          </td>
+        </tr>
+        <tr>
+          <td>Allow existing users to deregister</td>
+          <td>/users/[name]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>A text message indicating the user was deregistered</td>
+        </tr>
+      </tbody>
+    </table>
+
     <script src="js/server.js"></script>
   </body>
 </html>
