@@ -37,11 +37,26 @@
             A JSON object holding data about all movies, containing a
             description, the genre, director, and image URL. Example:
             <p>
-              { “Title”: “Silence of the Lambs”, “Description”: “A young F.B.I.
-              cadet must receive the help of an incarcerated and manipulative
-              cannibal killer to help catch another serial killer, a madman who
-              skins his victims.”, “Genre”: “Thriller”, “Director”: “Jonathan
-              Demme”, “Image URL”: silence_of_the_lambs.png}
+              {<br />
+              "Title”: “Silence of the Lambs”,<br />
+              “Description”: “A young F.B.I. cadet must receive the help of an
+              incarcerated and manipulative cannibal killer to help catch
+              another serial killer, a madman who skins his victims.”, <br />
+              “Genre”: {<br />
+              "Name":“Thriller”, <br />
+              "Description":"Thriller film, also known as suspense film or
+              suspense thriller, is a broad film genre that involves excitement
+              and suspense in the audience."<br />},<br />
+              “Director”: {<br />
+              "Name": “Jonathan Demme”,<br />
+              "Bio":"Robert Jonathan Demme was an American director, producer,
+              and screenwriter.",<br />
+              "Birth": "1944",<br />
+              "Death":"2017"<br />
+              },<br />
+              "Actors":[],<br />
+              “Image URL”: silence_of_the_lambs.png<br />
+              }
             </p>
           </td>
         </tr>
@@ -50,7 +65,7 @@
             Return data (description, genre, director, image URL, whether it’s
             featured or not) about a single movie by title to the user
           </td>
-          <td>/movies/[title]</td>
+          <td>/movies/[Title]</td>
           <td>GET</td>
           <td>None</td>
           <td>
@@ -63,7 +78,7 @@
             Return data about a genre (description) by name/title (e.g.,
             “Thriller”)
           </td>
-          <td>/genres/[genre]</td>
+          <td>/movies/genres/[genre]</td>
           <td>GET</td>
           <td>None</td>
           <td>
@@ -81,16 +96,19 @@
           <td>
             Return data about a director (bio, birth year, death year) by name
           </td>
-          <td>/directors/[director]</td>
+          <td>/movies/directors/[director]</td>
           <td>GET</td>
           <td>None</td>
           <td>
             A JSON object containing data about a single director by name.
             Example:
             <p>
-              {“Director”: “Jonathan Demme”, “Bio”: “American director,
-              producer, and screenwriter, etc.”, “Born”: “February 22nd, 1944”,
-              “Died”: “April 26th, 2017”}
+              {<br />
+              “Director”: “Jonathan Demme”,<br />
+              “Bio”: “American director,<br />
+              producer, and screenwriter, etc.”,<br />
+              “Born”: “1944”,<br />
+              “Died”: “April 26th, 2017”<br />}
             </p>
           </td>
         </tr>
@@ -101,32 +119,32 @@
           <td>
             A JSON object containing data about the new user. Example:
             <p>
-              {"Username":"janesmith","Password":"password123","email":"jsmith@gmail.com","Date
-              of Birth":"January 1, 1985"}
+              {<br />"Username":"janesmith",<br />"Password":"password123",<br />"email":"jsmith@gmail.com",<br />"Birthday":"04/12/1991"<br />}
             </p>
           </td>
           <td>
             A JSON object containing data about the user that was added,
             including an ID. Example:
             <p>
-              {“Id”:1, “Username”:”janesmith”, “Password”:”password123”,
-              “email”:”jsmith@gmail.com”, “Date of Birth”:"January 1, 1985"}
+              {<br />“Id”:1, <br />“Username”:”janesmith”,
+              <br />“Password”:”password123”,<br />
+              “email”:”jsmith@gmail.com”, <br />“Birthday”:"January 1, 1985"<br />}
             </p>
           </td>
         </tr>
         <tr>
           <td>
             Allow users to update their user info (username, password, email,
-            date of birth)
+            birthday)
           </td>
-          <td>/users/[name]/[info]</td>
+          <td>/users/[Username]</td>
           <td>PUT</td>
           <td>None</td>
           <td>A text message indicating the user information was updated</td>
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/users/[name]/[favorites]</td>
+          <td>/users/[Username]/[Movies]/[MovieID]</td>
           <td>POST</td>
           <td>None</td>
           <td>
@@ -136,7 +154,7 @@
         </tr>
         <tr>
           <td>Allow users to remove a movie from their list of favorites</td>
-          <td>/users/[name]/[favorites]</td>
+          <td>/users/[Username]/[Movies]/[MovieID]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
@@ -145,8 +163,8 @@
           </td>
         </tr>
         <tr>
-          <td>Allow existing users to deregister</td>
-          <td>/users/[name]</td>
+          <td>Delete a user by username</td>
+          <td>/users/[Username]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>A text message indicating the user was deregistered</td>
