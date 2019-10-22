@@ -4,7 +4,9 @@ const express = require('express'),
   mongoose = require('mongoose'),
   Models = require('./models.js'),
   uuid = require('uuid'),
-  passport = require('passport');
+  passport = require('passport'),
+  cors = require('cors'),
+  { check, validationResult } = require('express-validator');
 
 require('./passport.js');
 
@@ -19,11 +21,31 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use(cors());
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something ain\'t working right!');
 });
+
 var auth = require('./auth.js')(app);
+
+var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(
+  cors({
+    origin: function(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        //If a specific origin isn't found on the list of allowed origins
+        var message =
+          'The CORS policy for this application does not allow access from origin ' +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    }
+  })
+);
 
 // Gets the list of data about ALL movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), function(
@@ -90,6 +112,7 @@ app.get(
 
 //Adds data for a new user to our list of users
 app.post('/users', function(req, res) {
+  var hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then(function(user) {
       if (user) {
@@ -97,7 +120,7 @@ app.post('/users', function(req, res) {
       } else {
         Users.create({
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday
         })
@@ -267,4 +290,7 @@ app.get('/', function(req, res) {
   );
 });
 
-app.listen(8080, () => console.log('Your app is listening on Port 8080.'));
+var port = process.env.PORT || 3000;
+app.listen(port, '0.0.0.0', function() {
+  console.log('Listening on Port 3000.');
+});
