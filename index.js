@@ -13,9 +13,16 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+/*mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true
-});
+});*/
+
+mongoose.connect(
+  'mongodb+srv://myFlixDBadmin:Jamey02!@cluster0-dlnqj.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true
+  }
+);
 
 const app = express();
 app.use(bodyParser.json());
