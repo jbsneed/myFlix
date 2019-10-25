@@ -36,24 +36,6 @@ app.use(function(err, req, res, next) {
 
 var auth = require('./auth.js')(app);
 
-var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-
-app.use(
-  cors({
-    origin: function(origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        //If a specific origin isn't found on the list of allowed origins
-        var message =
-          'The CORS policy for this application does not allow access from origin ' +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    }
-  })
-);
-
 // Gets the list of data about ALL movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), function(
   req,
@@ -118,33 +100,59 @@ app.get(
 );
 
 //Adds data for a new user to our list of users
-app.post('/users', function(req, res) {
-  var hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username })
-    .then(function(user) {
-      if (user) {
-        return res.status(400).send(req.body.Username + ' already exists');
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: hashedPassword,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday
-        })
-          .then(function(user) {
-            res.status(201).json(user);
+app.post(
+  '/users',
+  [
+    check('Username', 'Username is required')
+      .not()
+      .isEmpty(),
+    check(
+      'Username',
+      'Username must contain only alphanumeric characters'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required')
+      .not()
+      .isEmpty(),
+    check('Password', 'Password must be at least 8 characters.').isLength({
+      min: 8
+    }),
+    check('Email', 'Valid email is required').isEmail()
+  ],
+  (req, res) => {
+    //check the validation object for errors
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    var hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username })
+      .then(function(user) {
+        if (user) {
+          return res.status(400).send(req.body.Username + ' already exists');
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
           })
-          .catch(function(error) {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-          });
-      }
-    })
-    .catch(function(error) {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+            .then(function(user) {
+              res.status(201).json(user);
+            })
+            .catch(function(error) {
+              console.error(error);
+              res.status(500).send('Error: ' + error);
+            });
+        }
+      })
+      .catch(function(error) {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      });
+  }
+);
 
 //Get ALL users
 app.get('/users', passport.authenticate('jwt', { session: false }), function(
@@ -188,7 +196,28 @@ Birthday: Date
 app.put(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
+  [
+    check('Username', 'Username is required.')
+      .not()
+      .isEmpty(),
+    check(
+      'Username',
+      'Username must contain only alphanumeric characters'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required')
+      .not()
+      .isEmpty(),
+    check('Password', 'Password must be at least 8 characters.').isLength({
+      min: 8
+    }),
+    check('Email', 'Valid email is required').isEmail()
+  ],
   function(req, res) {
+    var errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
