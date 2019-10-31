@@ -5,8 +5,10 @@ const express = require('express'),
   Models = require('./models.js'),
   uuid = require('uuid'),
   passport = require('passport'),
-  cors = require('cors'),
-  { check, validationResult } = require('express-validator');
+  cors = require('cors');
+
+const check = require('express-validator/check').check;
+const validationResult = require('express-validator/check').validationResult;
 
 require('./passport.js');
 
