@@ -4,7 +4,8 @@ import axios from 'axios';
 export class MainView extends React.Component {
   //One of the "hooks" available in a React Compoenent
   componentDidMount() {
-    axios.get('<my-api-endpoint/movies')
+    let myUrl = 'https://myflix247365.herokuapp.com';
+    axios.get('${myUrl}/movies')
       .then(response => {
         //Assign the result to the state
         this.setState({
