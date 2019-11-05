@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class MainView extends React.Component {
+export class MainView extends React.Component {
   //One of the "hooks" available in a React Compoenent
   componentDidMount() {
     axios.get('<my-api-endpoint/movies')
