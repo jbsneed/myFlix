@@ -25,10 +25,14 @@ export function LoginView(props) {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
       </Form.Group>
-      <Button variant="primary" onClick={handleSubmit}>Log In</Button>
+      <Button variant="primary" style={{ margin: 5 }} onClick={handleSubmit}>Log In</Button>
+      <Form.Group controlId='formRegisterNow'>
+        <Button variant="secondary" style={{ margin: 5 }} onClick={() => props.newUser()}>Create New Account</Button>
+      </Form.Group>
     </Form>);
 }
 
 LoginView.propTypes = {
+  newUser: PropTypes.func.isRequired,
   onLoggedIn: PropTypes.func.isRequired
 };

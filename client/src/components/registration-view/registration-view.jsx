@@ -9,7 +9,7 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const userRegistered = (e) => {
+  const successfullyRegistered = (e) => {
     e.preventDefault();
     props.userRegistered();
     props.onLoggedIn(username);
@@ -34,7 +34,7 @@ export function RegistrationView(props) {
         Birthday:
         <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </label>
-      <button type="button" onClick={handleSubmit}>Register</button>
+      <button type="button" onClick={successfullyRegistered}>Register</button>
     </form>
   );
 }
@@ -45,5 +45,6 @@ RegistrationView.propTypes = {
   email: PropTypes.string.isRequired,
   birthday: PropTypes.string.isRequired,
   userRegistered: PropTypes.func.isRequired,
-  onLoggedIn: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

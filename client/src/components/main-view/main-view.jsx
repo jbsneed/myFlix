@@ -73,16 +73,13 @@ export class MainView extends React.Component {
           onLoggedIn={user => this.onLoggedIn(user)} />;
       }
       else {
-        return <LoginView onLoggedIn={user => this.onLoggedIn(user)}
+        return <LoginView
+          onLoggedIn={user => this.onLoggedIn(user)}
           newUser={() => this.registerUser()}
           userRegistered={() => this.userRegistered()} />;
       }
 
     }
-    if (!user) return
-    <LoginView onLoggedIn={user => this.onLoggedIn(user)}
-      newUser={() => this.registerUser()}
-      userRegistered={() => this.userRegistered()} />;
 
     //Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
