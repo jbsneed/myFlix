@@ -1,8 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { RegistrationView } from '../registration-view/registration-view';
 
 export class MainView extends React.Component {
   constructor() {
@@ -10,7 +15,8 @@ export class MainView extends React.Component {
 
     this.state = {
       movies: null,
-      selectedMovie: null
+      selectedMovie: null,
+      user: null
     };
   }
   //One of the "hooks" available in a React Component
@@ -31,6 +37,25 @@ export class MainView extends React.Component {
       selectedMovie: movie
     });
   }
+
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
+
+  registerUser() {
+    this.setState({
+      newUser: true
+    });
+  }
+
+  userRegistered() {
+    this.setState({
+      newUser: null
+    });
+  }
+
   onBackClick() {
     this.setState({ selectedMovie: null });
   }
@@ -38,7 +63,26 @@ export class MainView extends React.Component {
   render() {
     //If the state isn't initialized, this will throw on runtime
     //before the data is initially loaded
-    const { movies, selectedMovie } = this.state;
+    const { movies, selectedMovie, user, newUser } = this.state;
+
+    if (!user) {
+      if (newUser) {
+        return
+        <RegistrationView
+          userRegistered={() => this.userRegistered()}
+          onLoggedIn={user => this.onLoggedIn(user)} />;
+      }
+      else {
+        return <LoginView onLoggedIn={user => this.onLoggedIn(user)}
+          newUser={() => this.registerUser()}
+          userRegistered={() => this.userRegistered()} />;
+      }
+
+    }
+    if (!user) return
+    <LoginView onLoggedIn={user => this.onLoggedIn(user)}
+      newUser={() => this.registerUser()}
+      userRegistered={() => this.userRegistered()} />;
 
     //Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
