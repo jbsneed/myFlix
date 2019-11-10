@@ -16,7 +16,8 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+
     };
   }
   //One of the "hooks" available in a React Component
@@ -66,19 +67,14 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user, newUser } = this.state;
 
     if (!user) {
-      if (newUser) {
-        return
-        <RegistrationView
-          userRegistered={() => this.userRegistered()}
-          onLoggedIn={user => this.onLoggedIn(user)} />;
-      }
-      else {
-        return <LoginView
-          onLoggedIn={user => this.onLoggedIn(user)}
-          newUser={() => this.registerUser()}
-          userRegistered={() => this.userRegistered()} />;
-      }
+      if (newUser) return <RegistrationView
+        userRegistered={() => this.userRegistered()}
+        onLoggedIn={user => this.onLoggedIn(user)} />
 
+      if (!user) return <LoginView
+        onLoggedIn={user => this.onLoggedIn(user)}
+        newUser={() => this.registerUser()}
+        userRegistered={() => this.userRegistered()} />;
     }
 
     //Before the movies have been loaded
