@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -17,25 +18,32 @@ export function RegistrationView(props) {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <label>
-        Email:
-        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Birthday:
-        <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </label>
-      <button type="button" onClick={successfullyRegistered}>Register</button>
-    </form>
+    <Form>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control type="username" placeholder="Alphanumeric characters only" value={username} onChange={e => setUsername(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control type="password" placeholder="Password must be at least 8 characters" value={password} onChange={e => setPassword(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control type="email" placeholder="Valid email required" value={email} onChange={e => setEmail(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control type="birthday" placeholder="MM/DD/YYYY" value={birthday} onChange={e => setBirthday(e.target.value)} />
+      </Form.Group>
+
+      <Button variant="primary" style={{ margin: 5 }} onClick={successfullyRegistered}>Register</Button>
+      <Form.Group controlId='formUserRegistered'>
+        <Button variant="secondary" style={{ margin: 5 }} onClick={() => props.userRegistered()}>Already a member? Log in here!</Button>
+      </Form.Group>
+    </Form>
   );
 }
 
@@ -47,4 +55,4 @@ RegistrationView.propTypes = {
   userRegistered: PropTypes.func.isRequired,
   onLoggedIn: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired
-};
+}
