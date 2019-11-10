@@ -35932,11 +35932,25 @@ function LoginView(props) {
     }
   })), _react.default.createElement(_Button.default, {
     variant: "primary",
+    style: {
+      margin: 5
+    },
     onClick: handleSubmit
-  }, "Log In"));
+  }, "Log In"), _react.default.createElement(_Form.default.Group, {
+    controlId: "formRegisterNow"
+  }, _react.default.createElement(_Button.default, {
+    variant: "secondary",
+    style: {
+      margin: 5
+    },
+    onClick: function onClick() {
+      return props.newUser();
+    }
+  }, "Create New Account")));
 }
 
 LoginView.propTypes = {
+  newUser: _propTypes.default.func.isRequired,
   onLoggedIn: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
@@ -36024,7 +36038,7 @@ MovieCard.propTypes = {
     }),
     Director: _propTypes.default.shape({
       Name: _propTypes.default.string.isRequired,
-      Bio: _propTypes.default.string.isRequired,
+      Bio: _propTypes.default.string,
       Birth: _propTypes.default.string.isRequired,
       Death: _propTypes.default.string
     }),
@@ -36142,6 +36156,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -36177,41 +36193,66 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var userRegistered = function userRegistered(e) {
+  var successfullyRegistered = function successfullyRegistered(e) {
     e.preventDefault();
     props.userRegistered();
     props.onLoggedIn(username);
     console.log(username, password, email, birthday);
   };
 
-  return _react.default.createElement("form", null, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
-    type: "text",
+  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+    type: "username",
+    placeholder: "Alphanumeric characters only",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
     type: "password",
+    placeholder: "Password must be at least 8 characters",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
-    type: "text",
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formEmail"
+  }, _react.default.createElement(_Form.default.Label, null, "Email:"), _react.default.createElement(_Form.default.Control, {
+    type: "email",
+    placeholder: "Valid email required",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Birthday:", _react.default.createElement("input", {
-    type: "date",
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBirthday"
+  }, _react.default.createElement(_Form.default.Label, null, "Birthday:"), _react.default.createElement(_Form.default.Control, {
+    type: "birthday",
+    placeholder: "MM/DD/YYYY",
     value: birthday,
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
     }
-  })), _react.default.createElement("button", {
-    type: "button",
-    onClick: handleSubmit
-  }, "Register"));
+  })), _react.default.createElement(_Button.default, {
+    variant: "primary",
+    style: {
+      margin: 5
+    },
+    onClick: successfullyRegistered
+  }, "Register"), _react.default.createElement(_Form.default.Group, {
+    controlId: "formUserRegistered"
+  }, _react.default.createElement(_Button.default, {
+    variant: "secondary",
+    style: {
+      margin: 5
+    },
+    onClick: function onClick() {
+      return props.userRegistered();
+    }
+  }, "Already a member? Log in here!")));
 }
 
 RegistrationView.propTypes = {
@@ -36220,9 +36261,10 @@ RegistrationView.propTypes = {
   email: _propTypes.default.string.isRequired,
   birthday: _propTypes.default.string.isRequired,
   userRegistered: _propTypes.default.func.isRequired,
-  onLoggedIn: _propTypes.default.func.isRequired
+  onLoggedIn: _propTypes.default.func.isRequired,
+  onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36351,45 +36393,26 @@ function (_React$Component) {
           newUser = _this$state.newUser;
 
       if (!user) {
-        if (newUser) {
-          return;
-
-          _react.default.createElement(_registrationView.RegistrationView, {
-            userRegistered: function userRegistered() {
-              return _this3.userRegistered();
-            },
-            onLoggedIn: function onLoggedIn(user) {
-              return _this3.onLoggedIn(user);
-            }
-          });
-        } else {
-          return _react.default.createElement(_loginView.LoginView, {
-            onLoggedIn: function onLoggedIn(user) {
-              return _this3.onLoggedIn(user);
-            },
-            newUser: function newUser() {
-              return _this3.registerUser();
-            },
-            userRegistered: function userRegistered() {
-              return _this3.userRegistered();
-            }
-          });
-        }
-      }
-
-      if (!user) return;
-
-      _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        },
-        newUser: function newUser() {
-          return _this3.registerUser();
-        },
-        userRegistered: function userRegistered() {
-          return _this3.userRegistered();
-        }
-      }); //Before the movies have been loaded
+        if (newUser) return _react.default.createElement(_registrationView.RegistrationView, {
+          userRegistered: function userRegistered() {
+            return _this3.userRegistered();
+          },
+          onLoggedIn: function onLoggedIn(user) {
+            return _this3.onLoggedIn(user);
+          }
+        });
+        if (!user) return _react.default.createElement(_loginView.LoginView, {
+          onLoggedIn: function onLoggedIn(user) {
+            return _this3.onLoggedIn(user);
+          },
+          newUser: function newUser() {
+            return _this3.registerUser();
+          },
+          userRegistered: function userRegistered() {
+            return _this3.userRegistered();
+          }
+        });
+      } //Before the movies have been loaded
 
 
       if (!movies) return _react.default.createElement("div", {
@@ -36575,7 +36598,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58898" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
