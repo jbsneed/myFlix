@@ -1,0 +1,21 @@
+$primary-color: #010038;
+$secondary-color:#2938A0;
+$white:#fff;
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: $primary-color;
+ 
+}
+
+.movie-view-card{
+  color:$white;
+  background-color:$secondary-color;
+  display:inline-block;
+  text-align: center;
+ 
+}
+
+.movie-title{
+  text-decoration: underline;
+}

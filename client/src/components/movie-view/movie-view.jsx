@@ -1,6 +1,8 @@
 import React from 'react';
 import { MainView } from '../main-view/main-view';
-
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import "./movie-view.scss"
 
 export class MovieView extends React.Component {
   constructor() {
@@ -16,25 +18,20 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <div className="back-button" onClick={() => onClick()}>Back
-        </div>
-        <img className="movie-poster" src={movie.ImagePath} />
-        <div className="movie-title">
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <div className="movie=director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-        </div>
+        <Card className="movie-view-card" style={{ width: '100%' }}>
+          <Card.Body>
+            <Card.Title className="movie-title">{movie.Title}</Card.Title>
+            <Card.Text>{movie.Description}</Card.Text>
+            <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
+            <Card.Text>Director: {movie.Director.Name}</Card.Text>
+
+
+            <Button variant="primary" onClick={() => onClick()}>Back</Button>
+          </Card.Body>
+        </Card>
       </div>
+
     );
   }
 }
+
