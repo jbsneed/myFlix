@@ -35873,6 +35873,8 @@ exports.LoginView = LoginView;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -35908,8 +35910,17 @@ function LoginView(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
+    /* Send a request to the server for authentication*/
+
+    _axios.default.post('https://myflix247365.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    }).then(function (response) {
+      var data = response.data;
+      props.onLoggedIn(data);
+    }).catch(function (e) {
+      console.log('no such user');
+    });
   };
 
   return _react.default.createElement(_Form.default, {
@@ -35955,7 +35966,7 @@ LoginView.propTypes = {
   newUser: _propTypes.default.func.isRequired,
   onLoggedIn: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -36440,9 +36451,31 @@ function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        user: user
+        user: authData.user.Username
+      });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('https://myflix247365.herokuapp.com/movies', {
+        header: {
+          Authorization: 'Bearer ${token}'
+        }
+      }).then(function (response) {
+        //Assign the result to the state
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }, {
@@ -36469,7 +36502,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       //If the state isn't initialized, this will throw on runtime
       //before the data is initially loaded
@@ -36482,21 +36515,21 @@ function (_React$Component) {
       if (!user) {
         if (newUser) return _react.default.createElement(_registrationView.RegistrationView, {
           userRegistered: function userRegistered() {
-            return _this3.userRegistered();
+            return _this4.userRegistered();
           },
           onLoggedIn: function onLoggedIn(user) {
-            return _this3.onLoggedIn(user);
+            return _this4.onLoggedIn(user);
           }
         });
         if (!user) return _react.default.createElement(_loginView.LoginView, {
           onLoggedIn: function onLoggedIn(user) {
-            return _this3.onLoggedIn(user);
+            return _this4.onLoggedIn(user);
           },
           newUser: function newUser() {
-            return _this3.registerUser();
+            return _this4.registerUser();
           },
           userRegistered: function userRegistered() {
-            return _this3.userRegistered();
+            return _this4.userRegistered();
           }
         });
       } //Before the movies have been loaded
@@ -36510,14 +36543,14 @@ function (_React$Component) {
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
-          return _this3.onBackClick();
+          return _this4.onBackClick();
         }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         });
       }));
