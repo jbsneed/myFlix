@@ -36107,19 +36107,7 @@ function (_React$Component) {
 exports.MovieCard = MovieCard;
 MovieCard.propTypes = {
   movie: _propTypes.default.shape({
-    Title: _propTypes.default.string.isRequired,
-    Description: _propTypes.default.string.isRequired,
-    Genre: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Description: _propTypes.default.string.isRequired
-    }),
-    Director: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Bio: _propTypes.default.string,
-      Birth: _propTypes.default.string.isRequired,
-      Death: _propTypes.default.string
-    }),
-    ImagePath: _propTypes.default.string.isRequired
+    Title: _propTypes.default.string.isRequired
   }).isRequired,
   onClick: _propTypes.default.func.isRequired
 };
@@ -36143,6 +36131,8 @@ var _mainView = require("../main-view/main-view");
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
 require("./movie-view.scss");
 
@@ -36210,7 +36200,25 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../node_modules/react/index.js","../main-view/main-view":"components/main-view/main-view.jsx","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+MovieView.propTypes = {
+  movie: _propTypes.default.shape({
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Description: _propTypes.default.string
+    }),
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Bio: _propTypes.default.string,
+      Birth: _propTypes.default.string,
+      Death: _propTypes.default.string
+    }),
+    ImagePath: _propTypes.default.string
+  }).isRequired,
+  onClick: _propTypes.default.func.isRequired
+};
+},{"react":"../node_modules/react/index.js","../main-view/main-view":"components/main-view/main-view.jsx","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","prop-types":"../node_modules/prop-types/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -36520,6 +36528,8 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
+MainView.propTypes = {//none
+};
 },{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
