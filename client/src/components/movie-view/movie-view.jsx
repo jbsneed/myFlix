@@ -1,5 +1,4 @@
 import React from 'react';
-import { MainView } from '../main-view/main-view';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';

@@ -1,8 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -108,6 +105,8 @@ export class MainView extends React.Component {
           } />
           <Route path="/register" render={() => <RegistrationView />} />
           <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+          <Route path="/directors/:name" render={({ match }) => <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />} />
+          <Routh path="/genres/:name" render={({ match }) => <GenreView genre={genres.find(m => m.Genre.Name === match.params.name).Genre} />} />
         </div>
       </Router>
     );
