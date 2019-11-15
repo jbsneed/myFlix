@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import "./registration-view.scss"
 
@@ -11,11 +10,20 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const successfullyRegistered = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    props.userRegistered();
-    props.onLoggedIn(username);
-    console.log(username, password, email, birthday);
+    axios.post('https://myflix247365.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    }).then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self');
+    }).catch(e => {
+      console.log('error registering the user')
+    });
   };
 
   return (
@@ -40,7 +48,7 @@ export function RegistrationView(props) {
         <Form.Control type="birthday" placeholder="MM/DD/YYYY" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </Form.Group>
 
-      <Button variant="primary" style={{ margin: 5 }} onClick={successfullyRegistered}>Register</Button>
+      <Button variant="primary" style={{ margin: 5 }} onClick={handleRegister}>Register</Button>
       <Form.Group controlId='formUserRegistered'>
         <Button variant="secondary" style={{ margin: 5 }} onClick={() => props.userRegistered()}>Already a member? Log in here!</Button>
       </Form.Group>
