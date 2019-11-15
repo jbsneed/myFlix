@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import "./movie-view.scss"
 
+import { Link } from "react-router-dom";
+
 export class MovieView extends React.Component {
   constructor() {
     super();
@@ -24,7 +26,13 @@ export class MovieView extends React.Component {
             <Card.Title className="movie-title">{movie.Title}</Card.Title>
             <Card.Text>{movie.Description}</Card.Text>
             <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant="link">Genre</Button>
+            </Link>
             <Card.Text>Director: {movie.Director.Name}</Card.Text>
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant="link">Director</Button>
+            </Link>
 
 
             <Button variant="primary" onClick={() => onClick()}>Back</Button>
