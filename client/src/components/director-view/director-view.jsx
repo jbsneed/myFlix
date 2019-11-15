@@ -24,7 +24,9 @@ export class DirectorView extends React.Component {
             <Card.Text>Born: {Director.Birth}</Card.Text>
             <Card.Text>Died: {Director.Death}</Card.Text>
 
-            <Button variant="primary" onClick={() => onClick()}>Back</Button>
+            <Link to={'/'}>
+              <Button variant="info">Back</Button>
+            </Link>
           </Card.Body>
         </Card>
       </div>

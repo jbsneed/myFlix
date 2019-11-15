@@ -12,7 +12,7 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { genre } = this.props;
 
     return (
       <div className="genre-view">
@@ -20,7 +20,9 @@ export class GenreView extends React.Component {
           <Card.Body>
             <Card.Title className="director-name">{Genre.Name}</Card.Title>
             <Card.Text>Description: {Genre.Description}</Card.Text>
-            <Button variant="primary" onClick={() => onClick()}>Back</Button>
+            <Link to={'/'}>
+              <Button variant="info">Back</Button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
