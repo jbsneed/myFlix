@@ -7,6 +7,10 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { GenreView } from '../genre-view/genre-view';
+import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
+import { ProfileUpdate } from '../profile-view/profile-update';
 
 export class MainView extends React.Component {
   constructor() {
@@ -14,8 +18,8 @@ export class MainView extends React.Component {
 
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null,
+      userInfo: {}
 
     };
   }
@@ -30,11 +34,13 @@ export class MainView extends React.Component {
     }
   }
 
-  onMovieClick(movie) {
+  updateUser(data) {
     this.setState({
-      selectedMovie: movie
+      userInfo: data
     });
+    localStorage.setItem('user', data.Username);
   }
+
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -83,14 +89,10 @@ export class MainView extends React.Component {
     });
   }
 
-  onBackClick() {
-    this.setState({ selectedMovie: null });
-  }
-
   render() {
     //If the state isn't initialized, this will throw on runtime
     //before the data is initially loaded
-    const { movies, selectedMovie, user, newUser } = this.state;
+    const { user, userInfo, token, movies } = this.state;
 
     //Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
@@ -98,15 +100,30 @@ export class MainView extends React.Component {
     return (
       <Router>
         <div className="main-view">
+          <div className="navigation btn-group">
+            <Link to={`/users/${user}`}>
+              <Button className="profile-btn" variant="info">
+                My Profile
+              </Button>
+            </Link>
+            <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout
+            </Button>
+          </div>
           <Route exact path="/" render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return movies.map(m => <MovieCard key={m._id} movie={m} />)
           }
           } />
           <Route path="/register" render={() => <RegistrationView />} />
-          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-          <Route path="/directors/:name" render={({ match }) => <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />} />
-          <Routh path="/genres/:name" render={({ match }) => <GenreView genre={genres.find(m => m.Genre.Name === match.params.name).Genre} />} />
+          <Route path="/movies/:movieId" render={({ match }) =>
+            <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+          <Route path="/directors/:name" render={({ match }) =>
+            <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />} />
+          <Route path="/genres/:name" render={({ match }) =>
+            <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />} />
+          <Route path="/users/:Username" render={({ match }) => { return <ProfileView userInfo={userInfo} /> }} />
+          <Route path="/update/:Username" render={() => <ProfileUpdate userInfo={userInfo} user={user} token={token} updateUser={data => this.updateUser(data)} />}
+          />
         </div>
       </Router>
     );

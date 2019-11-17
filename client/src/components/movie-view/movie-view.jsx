@@ -14,7 +14,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie) return null;
 
@@ -24,14 +24,17 @@ export class MovieView extends React.Component {
           <Card.Body>
             <Card.Title className="movie-title">{movie.Title}</Card.Title>
             <Card.Text>{movie.Description}</Card.Text>
-            <Card.Text>Genre: {movie.Genre.Name}</Card.Text>
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <Button variant="link">Genre</Button>
-            </Link>
-            <Card.Text>Director: {movie.Director.Name}</Card.Text>
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant="link">Director</Button>
-            </Link>
+            <Card.Text>Genre:
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <Button variant="link">{movie.Genre.Name}</Button>
+              </Link>
+            </Card.Text>
+            <Card.Text>Director:
+              <Link to={`/directors/${movie.Director.Name}`}>
+                <Button variant="link">{movie.Director.Name}</Button>
+              </Link>
+            </Card.Text>
+
             <Link to={'/'}>
               <Button variant="info">Back</Button>
             </Link>
