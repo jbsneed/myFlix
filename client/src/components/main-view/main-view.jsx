@@ -31,6 +31,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getUser(accessToken);
     }
   }
 
@@ -51,6 +52,7 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    this.getUser(authData.user.Username);
   }
 
   onLogout() {
@@ -72,6 +74,20 @@ export class MainView extends React.Component {
         });
       })
       .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getUser(token) {
+    axios.get('https://myflix247365.herokuapp.com/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(authData => {
+        this.setState({
+          user: authData.user.Username
+        });
+      })
+      .catch(function (err) {
         console.log(error);
       });
   }
@@ -101,7 +117,7 @@ export class MainView extends React.Component {
       <Router>
         <div className="main-view">
           <div className="navigation btn-group">
-            <Link to={`/users/${user}`}>
+            <Link to={`/users/{user}`}>
               <Button className="profile-btn" variant="info">
                 My Profile
               </Button>
