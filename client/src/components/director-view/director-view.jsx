@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import "./director-view.scss"
 
+import { Link } from "react-router-dom";
+
 
 export class DirectorView extends React.Component {
   constructor() {
@@ -13,18 +15,20 @@ export class DirectorView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { director } = this.props;
+
+    if (!director) return null;
 
     return (
       <div className="director-view">
         <Card className="director-view-card" style={{ width: '100%' }}>
           <Card.Body>
-            <Card.Title className="director-name">{Director.Name}</Card.Title>
-            <Card.Text>Bio: {Director.Bio}</Card.Text>
-            <Card.Text>Born: {Director.Birth}</Card.Text>
-            <Card.Text>Died: {Director.Death}</Card.Text>
-            <Link to={'/'}>
-              <Button variant="info">Back</Button>
+            <Card.Title className="director-name">{director.Name}</Card.Title>
+            <Card.Text className="director-info">Bio:<br /> {director.Bio}</Card.Text>
+            <Card.Text className="director-info">Born: {director.Birth}</Card.Text>
+            <Card.Text className="director-info">Died: {director.Death}</Card.Text>
+            <Link to={`/`}>
+              <Button variant="info">Home</Button>
             </Link>
           </Card.Body>
         </Card>
