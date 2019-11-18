@@ -12,6 +12,10 @@ import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { ProfileUpdate } from '../profile-view/profile-update';
 
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+
+
 export class MainView extends React.Component {
   constructor() {
     super();
@@ -31,36 +35,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
-      this.getUser(accessToken);
     }
-  }
-
-  updateUser(data) {
-    this.setState({
-      userInfo: data
-    });
-    localStorage.setItem('user', data.Username);
-  }
-
-
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-    this.getUser(authData.user.Username);
-  }
-
-  onLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({
-      user: null
-    })
   }
 
   getMovies(token) {
@@ -78,20 +53,32 @@ export class MainView extends React.Component {
       });
   }
 
-  getUser(token) {
-    axios.get('https://myflix247365.herokuapp.com/users', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(authData => {
-        this.setState({
-          user: authData.user.Username
-        });
-      })
-      .catch(function (err) {
-        console.log(error);
-      });
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
 
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    })
+    window.open('/', '_self');
+  }
+
+  updateUser(data) {
+    this.setState({
+      userInfo: data
+    });
+    localStorage.setItem('user', data.Username);
+  }
 
   registerUser() {
     this.setState({
@@ -117,10 +104,10 @@ export class MainView extends React.Component {
       <Router>
         <div className="main-view">
           <div className="navigation btn-group">
-            <Link to={`/users/{user}`}>
+            <Link to={`/users/${user}`}>
               <Button className="profile-btn" variant="info">
                 My Profile
-              </Button>
+              </Button><br />
             </Link>
             <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout
             </Button>

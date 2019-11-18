@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./registration-view.scss"
+
+import { Link } from "react-router-dom";
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -21,8 +24,8 @@ export function RegistrationView(props) {
       const data = response.data;
       console.log(data);
       window.open('/', '_self');
-    }).catch(e => {
-      console.log('error registering the user')
+    }).catch(err => {
+      console.error('error registering the user', err)
     });
   };
 
@@ -47,21 +50,14 @@ export function RegistrationView(props) {
         <Form.Label>Birthday:</Form.Label>
         <Form.Control type="birthday" placeholder="MM/DD/YYYY" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </Form.Group>
-
-      <Button variant="primary" style={{ margin: 5 }} onClick={handleRegister}>Register</Button>
-      <Form.Group controlId='formUserRegistered'>
-        <Button variant="secondary" style={{ margin: 5 }} onClick={() => props.userRegistered()}>Already a member? Log in here!</Button>
-      </Form.Group>
+      <Button variant="primary" style={{ margin: 5 }} type="submit" onClick={handleRegister}>Register</Button>
+      <Button variant="secondary">
+        <Link to={'/'}>Already a member? Login here.</Link>
+      </Button>
     </Form>
   );
 }
 
 RegistrationView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  birthday: PropTypes.string.isRequired,
-  userRegistered: PropTypes.func.isRequired,
-  onLoggedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+
 }

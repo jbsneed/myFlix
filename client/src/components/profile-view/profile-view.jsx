@@ -8,8 +8,6 @@ import './profile-view.scss'
 
 import { Link } from 'react-router-dom';
 
-
-
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -54,21 +52,19 @@ export class ProfileView extends React.Component {
   }
 
   deleteFavoriteMovie(event, FavoriteMovie) {
-    let username = localStorage.getItem('user');
-    let token = localStorage.getItem('token');
     event.preventDefault();
     console.log(FavoriteMovie);
-    axios.delete(`https://myflix247365.herokuapp.com/users/${username}/FavoriteMovies/${FavoriteMovie}`, {
+    axios.delete(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}FavoriteMovies/${FavoriteMovie}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
-      this.getUser(token)
+      this.getUser(localStorage.getItem('token'));
     }).catch(event => {
-      alert('Something ain\'t working right!');
+      alert('Not working');
     });
   }
 
   render() {
-    const { username, password, email, birthday, FavoriteMovies } = this.state;
+    const { username, email, birthday, FavoriteMovies } = this.state;
 
     return (
 
@@ -76,7 +72,7 @@ export class ProfileView extends React.Component {
         <Card className="profile-view-card" style={{ width: '100%' }}>
           <Card.Body>
             <Card.Title className="profile-name">{username}</Card.Title>
-            <ListGroup.Item>Password: {password}</ListGroup.Item>
+            <ListGroup.Item>Password: ********</ListGroup.Item>
             <ListGroup.Item>Email: {email}</ListGroup.Item>
             <ListGroup.Item>Birthday: {birthday}</ListGroup.Item>
             <ListGroup.Item> Favorite Movies:

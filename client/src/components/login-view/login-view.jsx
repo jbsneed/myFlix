@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from "react-router-dom";
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -37,7 +38,9 @@ export function LoginView(props) {
       </Form.Group>
       <Button variant="primary" style={{ margin: 5 }} onClick={handleSubmit}>Log In</Button>
       <Form.Group controlId='formRegisterNow'>
-        <Button variant="secondary" style={{ margin: 5 }} onClick={() => props.newUser()}>Create New Account</Button>
+        <Link to={`/register`}>
+          <Button variant="secondary" style={{ margin: 5 }}>Create New Account</Button>
+        </Link>
       </Form.Group>
     </Form>);
 }
