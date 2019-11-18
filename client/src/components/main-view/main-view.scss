@@ -6,3 +6,11 @@ $white:#fff;
 body{
   font-family: 'Poppins', sans-serif;
 }
+
+.profile-btn,
+.logout,
+.navigation{
+display: block;
+margin:5px;
+text-align: right;
+}

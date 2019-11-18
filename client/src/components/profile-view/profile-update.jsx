@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./profile-view.scss"
 
-export function UpdateProfile(props) {
-  const { username, password, email, birthday } = props.userInfo;
-  const user = props.user;
+export function ProfileUpdate(props) {
+  const {
+    Username: oldUsername,
+    Password: oldPassword,
+    Email: oldEmail,
+    Birthday: oldBirthday
+  } = props.userInfo;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
 
-  const [oldUsername, setNewUsername] = useState('');
-  const [oldPassword, setNewPassword] = useState('');
-  const [oldEmail, setNewEmail] = useState('');
-  const [oldBirthday, setNewBirthday] = useState('');
+  useEffect(() => {
+    setUsername(oldUsername);
+    setPassword(oldPassword);
+    setEmail(oldEmail);
+    setBirthday(oldBirthday);
+  }, [oldUsername, oldPassword, oldEmail, oldBirthday]);
+
+  const user = props.user;
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -21,14 +33,13 @@ export function UpdateProfile(props) {
       Email: email,
       Birthday: birthday
     };
-
     axios.put(`https://myflix247365.herokuapp.com/users/${user}`,
       userInfo,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       },
     )
-      .then(respons => {
+      .then(response => {
         props.updateUser(userInfo);
         alert('Your profile was updated.');
       })
@@ -40,22 +51,22 @@ export function UpdateProfile(props) {
       <Form className="update-form">
         <Form.Group controlId="formUsername">
           <Form.Label>New Username: </Form.Label>
-          <Form.Control type="username" placeholder="Alphanumeric characters only" value={oldUsername} onChange={e => setNewUsername(e.target.value)} />
+          <Form.Control type="username" placeholder="Alphanumeric characters only" value={oldUsername} onChange={e => setUsername(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>New Password:</Form.Label>
-          <Form.Control type="password" placeholder="Password must be at least 8 characters" value={oldPassword} onChange={e => setNewPassword(e.target.value)} />
+          <Form.Control type="password" placeholder="Password must be at least 8 characters" value={oldPassword} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formEmail">
           <Form.Label>New Email:</Form.Label>
-          <Form.Control type="email" placeholder="Valid email required" value={oldEmail} onChange={e => setNewEmail(e.target.value)} />
+          <Form.Control type="email" placeholder="Valid email required" value={oldEmail} onChange={e => setEmail(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formBirthday">
           <Form.Label>New Birthday:</Form.Label>
-          <Form.Control type="birthday" placeholder="MM/DD/YYYY" value={oldBirthday} onChange={e => setNewBirthday(e.target.value)} />
+          <Form.Control type="birthday" placeholder="MM/DD/YYYY" value={oldBirthday} onChange={e => setBirthday(e.target.value)} />
         </Form.Group>
 
         <Button variant="primary" style={{ margin: 5 }} onClick={handleUpdate}>Update Info</Button>
@@ -63,13 +74,6 @@ export function UpdateProfile(props) {
     );
   }
 
-  RegistrationView.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
-    userRegistered: PropTypes.func.isRequired,
-    onLoggedIn: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired
+  ProfileUpdate.propTypes = {
   };
 }

@@ -11,7 +11,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { ProfileUpdate } from '../profile-view/profile-update';
-
+import "./main-view.scss"
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
@@ -108,8 +108,8 @@ export class MainView extends React.Component {
           <div className="navigation btn-group">
             <Link to={`/users/${user}`}>
               <Button className="profile-btn" variant="info">
-                My Profile
-              </Button><br />
+                My Profile<br />
+              </Button>
             </Link>
             <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout
             </Button>
