@@ -11,6 +11,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { ProfileUpdate } from '../profile-view/profile-update';
+import Row from 'react-bootstrap/Row';
 import "./main-view.scss"
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -104,16 +105,15 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <div className="main-view">
-          <div className="navigation btn-group">
-            <Link to={`/users/${user}`}>
-              <Button className="profile-btn" variant="info">
-                My Profile<br />
-              </Button>
-            </Link>
-            <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout
+        <div className="navigation btn-group">
+          <Link to={`/users/${user}`}>
+            <Button className="profile-btn" variant="info">
+              My Profile<br />
             </Button>
-          </div>
+          </Link>
+          <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout</Button>
+        </div>
+        <Row>
           <Route exact path="/" render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return movies.map(m => <MovieCard key={m._id} movie={m} />)
@@ -127,9 +127,9 @@ export class MainView extends React.Component {
           <Route path="/genres/:name" render={({ match }) =>
             <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />} />
           <Route path="/users/:Username" render={({ match }) => { return <ProfileView userInfo={userInfo} /> }} />
-          <Route path="/update/:Username" render={() => <ProfileUpdate userInfo={userInfo} user={user} token={token} updateUser={data => this.updateUser(data)} />}
+          <Route path="/users/:Username" render={() => <ProfileUpdate userInfo={userInfo} user={user} token={token} updateUser={data => this.updateUser(data)} />}
           />
-        </div>
+        </Row>
       </Router>
     );
   }

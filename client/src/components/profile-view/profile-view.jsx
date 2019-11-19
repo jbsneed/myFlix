@@ -39,7 +39,7 @@ export class ProfileView extends React.Component {
     })
       .then(response => {
         //Assign the result to the state
-        this.setState({
+        this.setState([{
           userData: response.data,
           username: response.data,
           password: response.data,
@@ -47,7 +47,7 @@ export class ProfileView extends React.Component {
           birthday: response.data,
           FavoriteMovies: response.data.FavoriteMovies
 
-        });
+        }]);
       })
       .catch(function (error) {
         console.log(error);
