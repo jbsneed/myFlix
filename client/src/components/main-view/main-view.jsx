@@ -127,7 +127,7 @@ export class MainView extends React.Component {
           <Route path="/genres/:name" render={({ match }) =>
             <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />} />
           <Route path="/users/:Username" render={({ match }) => { return <ProfileView userInfo={userInfo} /> }} />
-          <Route path="/users/:Username" render={() => <ProfileUpdate userInfo={userInfo} user={user} token={token} updateUser={data => this.updateUser(data)} />}
+          <Route path="/update/:Username" render={() => <ProfileUpdate userInfo={userInfo} user={user} token={token} updateUser={data => this.updateUser(data)} />}
           />
         </Row>
       </Router>
