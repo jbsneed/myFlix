@@ -18,6 +18,7 @@ export class ProfileView extends React.Component {
       email: null,
       birthday: null,
       userData: null,
+      userInfo: {},
       FavoriteMovies: []
     };
   }
@@ -93,7 +94,7 @@ export class ProfileView extends React.Component {
               </div>
             </ListGroup.Item>
             <Link to={'/'}>
-              <Button variant="info">Back</Button>
+              <Button variant="info">Home</Button>
             </Link>
 
             <Link to={`/update/:Username`}>

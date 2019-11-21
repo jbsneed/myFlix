@@ -62,5 +62,4 @@ MovieView.propTypes = {
     }),
     ImagePath: PropTypes.string
   }).isRequired,
-  onClick: PropTypes.func.isRequired
 };
