@@ -56,17 +56,17 @@ export class ProfileView extends React.Component {
   deleteFavoriteMovie(event, favoriteMovie) {
     event.preventDefault();
     axios.delete(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${favoriteMovie}`, {
-      Username: localStorage.getItem('user')
-    }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(response => {
       console.log(response);
+      window.open('/users/:Username', '_self');
       alert('Deleted from favorites.');
     }).catch(event => {
       console.log('Not working.');
       alert('Not working');
     });
   }
+
 
   render() {
     const { username, email, birthday, favoriteMovies } = this.state;
@@ -77,7 +77,7 @@ export class ProfileView extends React.Component {
       <div className="profile-view">
         <Card className="profile-view-card" style={{ width: '100%' }}>
           <Card.Body>
-            <Card.Title className="profile-name">{username}</Card.Title>
+            <Card.Title className="profile-name">~ {username} ~</Card.Title>
             <ListGroup.Item>Password: ********</ListGroup.Item>
             <ListGroup.Item>Email: {email}</ListGroup.Item>
             <ListGroup.Item>Birthday: {birthday}</ListGroup.Item>
