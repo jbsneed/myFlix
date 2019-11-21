@@ -11,6 +11,10 @@ export function ProfileUpdate(props) {
   const [birthday, setNewBirthday] = useState('');
 
   const user = props.user;
+  if (!user) {
+    alert('You are not logged in.');
+    window.open('/', '_self');
+  }
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -40,7 +44,7 @@ export function ProfileUpdate(props) {
   const handleDelete = (e) => {
     e.preventDefault();
     axios.delete(`https://myflix247365.herokuapp.com/users/${user}`, {
-      header: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(response => {
       alert('Your account has been deleted.');
       localStorage.removeItem('token');
