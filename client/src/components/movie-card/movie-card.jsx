@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -9,6 +10,22 @@ import { Link } from "react-router-dom";
 export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
+    if (!movie) return null;
+
+    function addMovieToFavorites(e) {
+      e.preventDefault();
+      axios.post(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${movie._id}`, {
+        Username: localStorage.getItem('user')
+      }, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      }).then(response => {
+        console.log(response);
+        alert('Added to favorites.');
+      }).catch(event => {
+        console.log('Error adding movie to your favorites.');
+        alert('Error adding movie to your favorites.');
+      });
+    };
 
     return (
       <Card className="movie-card" style={{ width: '30%' }}>
@@ -18,6 +35,7 @@ export class MovieCard extends React.Component {
           <Link to={`/movies/${movie._id}`}>
             <Button variant="link">Open</Button>
           </Link>
+          <Button variant="link" onClick={event => addMovieToFavorites(event)}>Add to Favorites</Button>
         </Card.Body>
       </Card>
 
@@ -29,5 +47,4 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired
 };
