@@ -190,7 +190,7 @@ app.get(
 Username:String,(required)
 Password:String,(required)
 Email: String, (required)
-Birthday: Date
+Birthday: String(required)
 }*/
 app.put(
   '/users/:Username',
