@@ -107,11 +107,11 @@ export class MainView extends React.Component {
       <Router>
         <div className="navigation btn-group">
           <Link to={`/users/${user}`}>
-            <Button className="profile-btn" variant="info">
+            <Button className="nav-btn" variant="info">
               My Profile<br />
             </Button>
           </Link>
-          <Button className="logout" variant="info" onClick={() => this.onLogout()}>Logout</Button>
+          <Button className="nav-btn" variant="info" onClick={() => this.onLogout()}>Logout</Button>
         </div>
         <Row>
           <Route exact path="/" render={() => {

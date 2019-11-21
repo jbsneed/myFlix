@@ -3,14 +3,18 @@ $secondary-color:#2938A0;
 $white:#fff;
 
 
+*{
+  box-sizing:border-box; 
+}
+
 body{
   font-family: 'Poppins', sans-serif;
 }
 
-.profile-btn,
-.logout,
-.navigation{
-display: block;
+.nav-btn{
+display: flex;
+justify-content:flex-end;
+margin-right:2px;
 margin:5px;
-text-align: right;
+padding:5px;
 }
