@@ -19,7 +19,7 @@ export class ProfileView extends React.Component {
       birthday: null,
       userData: null,
       userInfo: {},
-      FavoriteMovies: []
+      favoriteMovies: []
     };
   }
 
@@ -40,35 +40,37 @@ export class ProfileView extends React.Component {
     })
       .then(response => {
         //Assign the result to the state
-        this.setState([{
-          userData: response.data,
+        this.setState({
           username: response.data.Username,
           password: response.data.Password,
           email: response.data.Email,
           birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies
-
-        }]);
+          favoriteMovies: response.data.FavoriteMovies
+        });
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  deleteFavoriteMovie(event, FavoriteMovie) {
+  deleteFavoriteMovie(event, favoriteMovie) {
     event.preventDefault();
-    console.log(FavoriteMovie);
-    axios.delete(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}FavoriteMovies/${FavoriteMovie}`, {
-      headers: { Authorization: `Bearer ${token}` }
+    axios.delete(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${favoriteMovie}`, {
+      Username: localStorage.getItem('user')
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(response => {
-      this.getUser(localStorage.getItem('token'));
+      console.log(response);
+      alert('Deleted from favorites.');
     }).catch(event => {
+      console.log('Not working.');
       alert('Not working');
     });
   }
 
   render() {
-    const { username, email, birthday, FavoriteMovies } = this.state;
+    const { username, email, birthday, favoriteMovies } = this.state;
+    let movies = localStorage.getItem('movies');
 
     return (
 
@@ -81,15 +83,20 @@ export class ProfileView extends React.Component {
             <ListGroup.Item>Birthday: {birthday}</ListGroup.Item>
             <ListGroup.Item> Favorite Movies:
               <div>
-                {FavoriteMovies.map(FavoriteMovie =>
+                {favoriteMovies.length === 0 &&
+                  <div className="value">You don't have any favorites!</div>
+                }
+                {favoriteMovies.length > 0 &&
                   <ul>
-                    <li key={FavoriteMovie}>
-                      <p>
-                        {JSON.parse(localStorage.getItem('movies')).find(movie => movie._id === FavoriteMovie).Title}
-                      </p>
-                      <Button variant="secondary" onClick={(event) => this.deleteFavoriteMovie(event, FavoriteMovie)}>Delete from Favorites</Button>
-                    </li>
-                  </ul>)
+                    {favoriteMovies.map(favoriteMovie =>
+                      <li key={favoriteMovie}>
+                        <p>
+                          {JSON.parse(movies) && movies.find(movie => movie._id === favoriteMovie).Title}
+                        </p>
+                        <Button variant="secondary" onClick={(event) => this.deleteFavoriteMovie(event, favoriteMovie)}>Delete from Favorites</Button>
+                      </li>
+                    )}
+                  </ul>
                 }
               </div>
             </ListGroup.Item>
