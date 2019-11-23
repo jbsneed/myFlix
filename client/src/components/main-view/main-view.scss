@@ -9,10 +9,20 @@ body{
   padding:10px;
 }
 
-.nav-btn{
+.navigation-btn-group{
 display: flex;
-justify-content:flex-end;
-margin-right:2px;
+flex-direction: row-reverse;
 margin:5px;
-padding:5px;
+padding:10px;
+}
+
+.nav-btn{
+  margin:5px;
+  padding: 5px;
+}
+
+.header{
+  text-align: center;
+  display: wrap;
+  color: $white;
 }

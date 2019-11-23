@@ -40,12 +40,13 @@ export class ProfileView extends React.Component {
     })
       .then(response => {
         //Assign the result to the state
+        const movies = localStorage.getItem('movies');
         this.setState({
           username: response.data.Username,
           password: response.data.Password,
           email: response.data.Email,
           birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
+          favoriteMovies: response.data.FavoriteMovies.map(id => JSON.parse(movies).find(m => m._id === id))
         });
       })
       .catch(function (error) {
@@ -73,7 +74,6 @@ export class ProfileView extends React.Component {
     let movies = localStorage.getItem('movies');
 
     return (
-
       <div className="profile-view">
         <Card className="profile-view-card" style={{ width: '100%' }}>
           <Card.Body>
@@ -87,26 +87,26 @@ export class ProfileView extends React.Component {
                   <div className="value">You don't have any favorites!</div>
                 }
                 {favoriteMovies.length > 0 &&
-                  <ul>
-                    {favoriteMovies.map(favoriteMovie =>
-                      <li key={favoriteMovie}>
-                        <p>
-                          {favoriteMovie}
-                        </p>
-                        <Button variant="secondary" onClick={(event) => this.deleteFavoriteMovie(event, favoriteMovie)}>Delete from Favorites</Button>
+                  <ul className="favorite-movies">
+                    {favoriteMovies.map((favoriteMovie, i) =>
+                      <li key={i}>
+                        <p>{favoriteMovie.Title}
+                          <Button className="deletefav-btn" variant="link" onClick={(event) => this.deleteFavoriteMovie(event, favoriteMovie._id)}>Delete from Favorites</Button></p>
                       </li>
                     )}
                   </ul>
                 }
               </div>
             </ListGroup.Item>
-            <Link to={'/'}>
-              <Button variant="info">Home</Button>
-            </Link>
+            <div className="buttons">
+              <Link to={'/'}>
+                <Button className="home-btn" variant="info">Home</Button>
+              </Link>
 
-            <Link to={`/update/:Username`}>
-              <Button className="update-button">Update my info</Button>
-            </Link>
+              <Link to={`/update/:Username`}>
+                <Button className="update-btn">Update my info</Button>
+              </Link>
+            </div>
           </Card.Body>
         </Card>
       </div>

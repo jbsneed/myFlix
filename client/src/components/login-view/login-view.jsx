@@ -3,6 +3,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import "./login-view.scss"
 
 import { Link } from "react-router-dom";
 
@@ -29,20 +30,20 @@ export function LoginView(props) {
   return (
     <Form className="login-form">
       <Form.Group controlId="formUsername">
-        <Form.Label>Username</Form.Label>
+        <Form.Label className="label">Username</Form.Label>
         <Form.Control type="username" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label className="label">Password</Form.Label>
         <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
       </Form.Group>
-      <Button variant="primary" style={{ margin: 5 }} onClick={handleSubmit}>Log In</Button>
-      <Form.Group controlId='formRegisterNow'>
+      <div className="buttons">
+        <Button className="login-btn" variant="primary" onClick={handleSubmit}>Log In</Button>
         <Link to={`/register`}>
-          <Button variant="secondary" style={{ margin: 5 }}>Create New Account</Button>
+          <Button className="register-btn" variant="primary">Create New Account</Button>
         </Link>
-      </Form.Group>
+      </div>
     </Form>);
 }
 

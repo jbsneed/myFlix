@@ -8,14 +8,22 @@ body{
  
 }
 
-.movie-view-card{
-  color:$white;
-  background-color:$secondary-color;
-  display:inline-block;
-  text-align: center;
- 
-}
+.movie-view{
+  display: block;
+  margin: auto;
+  width: 30%;
+  border: 3px solid $secondary-color;
+  padding: 10px;
+  background-color: $primary-color;
+  }
 
 .movie-title{
   text-decoration: underline;
+  text-align: center;
+}
+
+.home-btn{
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
 }

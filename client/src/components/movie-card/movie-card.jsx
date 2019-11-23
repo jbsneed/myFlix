@@ -33,9 +33,9 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
+            <Button variant="primary" className="open-btn">Open</Button>
           </Link>
-          <Button variant="link" onClick={event => addMovieToFavorites(event)}>Add to Favorites</Button>
+          <Button variant="primary" className="addfav-btn" onClick={event => addMovieToFavorites(event)}>Add to Favorites</Button>
         </Card.Body>
       </Card>
 

@@ -1,6 +1,7 @@
 $primary-color: #010038;
 $secondary-color:#2938A0;
 $white:#fff;
+$black: #000;
 
 body{
   font-family:'Yeon Sung',cursive;
@@ -10,4 +11,14 @@ body{
   text-align:center;
   margin:10px;
   padding:5px;
+}
+
+.addfav-btn{
+  margin: 5px;
+  padding: 5px;
+}
+
+.home-btn{
+  margin:5px;
+  padding: 5px;
 }

@@ -2,7 +2,25 @@ $primary-color: #010038;
 $secondary-color:#2938A0;
 $white:#fff;
 
-body{
-  margin:10px;
+.login-form{
+  display: block;
+  margin: auto;
+  width: 40%;
+  border: 3px solid $secondary-color;
+  padding: 10px;
+  background-color: $primary-color;
 }
 
+.butttons{
+  text-align: center;
+}
+
+.login-btn{
+  margin-right: 15px;
+  padding: 5px
+}
+
+.register-btn{
+  margin-left: 15px;
+  padding: 5px;
+}

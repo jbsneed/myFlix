@@ -24,11 +24,11 @@ export class DirectorView extends React.Component {
         <Card className="director-view-card" style={{ width: '100%' }}>
           <Card.Body>
             <Card.Title className="director-name">{director.Name}</Card.Title>
-            <Card.Text className="director-info">Bio:<br /> {director.Bio}</Card.Text>
+            <Card.Text className="director-info">Bio: {director.Bio}</Card.Text>
             <Card.Text className="director-info">Born: {director.Birth}</Card.Text>
             <Card.Text className="director-info">Died: {director.Death}</Card.Text>
             <Link to={`/`}>
-              <Button variant="info">Home</Button>
+              <Button className="home-btn" variant="info">Home</Button>
             </Link>
           </Card.Body>
         </Card>

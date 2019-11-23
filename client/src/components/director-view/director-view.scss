@@ -8,14 +8,20 @@ body{
  
 }
 
-.director-view-card{
-  color:$white;
-  background-color:$secondary-color;
-  display:inline-block;
-  text-align: center;
- 
+.director-view{
+  display: block;
+  margin: auto;
+  width: 30%;
+  border: 3px solid $secondary-color;
+  padding: 10px;
+  background-color: $primary-color;
 }
 
 .director-name{
   text-decoration: underline;
+  text-align: center;
+}
+
+.home-btn{
+  text-align: center;
 }

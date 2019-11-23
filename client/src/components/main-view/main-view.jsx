@@ -50,6 +50,7 @@ export class MainView extends React.Component {
         this.setState({
           movies: response.data
         });
+        localStorage.setItem('movies', JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -105,13 +106,16 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <div className="navigation btn-group">
+        <div className="navigation-btn-group">
+          {user ? (<Button className="nav-btn" variant="info" onClick={() => this.onLogout()}>Logout</Button>) : null}
           <Link to={`/users/${user}`}>
-            <Button className="nav-btn" variant="info">
+            {user ? (<Button className="nav-btn" variant="info">
               My Profile<br />
-            </Button>
+            </Button>) : null}
           </Link>
-          <Button className="nav-btn" variant="info" onClick={() => this.onLogout()}>Logout</Button>
+        </div>
+        <div className="header">
+          <h1>myFlix</h1>
         </div>
         <Row>
           <Route exact path="/" render={() => {
