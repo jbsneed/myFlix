@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,10 +11,6 @@ export function ProfileUpdate(props) {
   const [birthday, setNewBirthday] = useState('');
 
   const user = props.user;
-  if (!user) {
-    alert('You are not logged in.');
-    window.open('/', '_self');
-  }
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -24,15 +20,12 @@ export function ProfileUpdate(props) {
       Email: email,
       Birthday: birthday
     };
-    axios.put(`https://myflix247365.herokuapp.com/users/${user}`, userInfo,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      },
+    axios.put(`http://localhost:3000/users/${user}`, userInfo,
+      { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
     )
       .then(response => {
-        props.updateUser(userInfo);
-        const update = response.data;
-        console.log(update);
+        const data = response.data;
+        props.updateUser(data);
         alert('Your profile was updated.');
         window.open('/', '_self');
       })
@@ -43,7 +36,7 @@ export function ProfileUpdate(props) {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    axios.delete(`https://myflix247365.herokuapp.com/users/${user}`, {
+    axios.delete(`http://localhost:3000/users/${user}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(response => {
       alert('Your account has been deleted.');
