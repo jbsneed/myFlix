@@ -15,16 +15,16 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-/*mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true
-});*/
+});
 
-mongoose.connect(
-  'mongodb+srv://myFlixDBadmin:Jamey02!@cluster0-dlnqj.mongodb.net/myFlixDB?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true
-  }
-);
+// mongoose.connect(
+//   'mongodb+srv://myFlixDBadmin:Jamey02!@cluster0-dlnqj.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+//   {
+//     useNewUrlParser: true
+//   }
+// );
 
 const app = express();
 app.use(bodyParser.json());
@@ -217,12 +217,13 @@ app.put(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
+    var hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
         $set: {
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday
         }
