@@ -1,0 +1,195 @@
+.search-bar {
+  position: absolute;
+  height: 30px;
+  width: 200px;
+  top: 110px;
+  right: 105px;
+}
+body {
+  font-family: "Yeon Sung", cursive;
+}
+
+.movie-card {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+}
+
+.addfav-btn {
+  margin: 5px;
+  padding: 5px;
+}
+
+.home-btn {
+  margin: 5px;
+  padding: 5px;
+}
+.login-form {
+  display: block;
+  margin: auto;
+  width: 40%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+
+.butttons {
+  text-align: center;
+}
+
+.login-btn {
+  margin-right: 15px;
+  padding: 5px;
+}
+
+.register-btn {
+  margin-left: 15px;
+  padding: 5px;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #010038;
+}
+
+.movie-view {
+  display: block;
+  margin: auto;
+  width: 30%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+
+.movie-title {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.home-btn {
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+.registration-form {
+  display: block;
+  margin: auto;
+  width: 40%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #010038;
+}
+
+.genre-view {
+  display: block;
+  margin: auto;
+  width: 30%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+
+.genre-name {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.home-btn {
+  text-align: center;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #010038;
+}
+
+.director-view {
+  display: block;
+  margin: auto;
+  width: 30%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+
+.director-name {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.home-btn {
+  text-align: center;
+}
+.profile-name {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.profile-name {
+  color: #fff;
+}
+
+.profile-view,
+.update-form {
+  display: block;
+  margin: auto;
+  width: 40%;
+  border: 3px solid #2938A0;
+  padding: 10px;
+  background-color: #010038;
+}
+
+.label {
+  color: #fff;
+}
+
+.profile-view-card {
+  background-color: #010038;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.home-btn {
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+.update-btn {
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 10px;
+  padding: 10px;
+}
+
+.navigation-btn-group {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 5px;
+  padding: 10px;
+}
+
+.nav-btn {
+  margin: 5px;
+  padding: 5px;
+}
+
+.header {
+  text-align: center;
+  display: wrap;
+  color: #fff;
+}
+.my-flix {
+  color: steelblue;
+}
+
+/*# sourceMappingURL=/src.78399e21.css.map */

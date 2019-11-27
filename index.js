@@ -5,7 +5,8 @@ const express = require('express'),
   Models = require('./models.js'),
   uuid = require('uuid'),
   passport = require('passport'),
-  cors = require('cors');
+  cors = require('cors'),
+  path = require("path");
 
 const check = require('express-validator/check').check;
 const validationResult = require('express-validator/check').validationResult;
@@ -30,6 +31,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 app.use(cors());
 app.use(function (err, req, res, next) {
   console.error(err.stack);
