@@ -24,7 +24,7 @@ export function RegistrationView(props) {
       const data = response.data;
       console.log(data);
       alert('Successfully registered!');
-      window.open('/', '_self');
+      window.open('/client', '_self');
     }).catch(err => {
       console.error('Error registering the user.', err)
     });
