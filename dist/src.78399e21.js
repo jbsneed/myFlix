@@ -41423,7 +41423,7 @@ function (_React$Component) {
       function addMovieToFavorites(e) {
         e.preventDefault();
 
-        _axios.default.post("https://myflix247365.herokuapp.com/users/".concat(localStorage.getItem('user'), "/Movies/").concat(movie._id), {
+        _axios.default.post("http://localhost:3000/users/".concat(localStorage.getItem('user'), "/Movies/").concat(movie._id), {
           Username: localStorage.getItem('user')
         }, {
           headers: {
@@ -41581,7 +41581,7 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication*/
 
-    _axios.default.post('https://myflix247365.herokuapp.com/login', {
+    _axios.default.post('http://localhost:3000/login', {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -41811,7 +41811,7 @@ function RegistrationView(props) {
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
 
-    _axios.default.post('https://myflix247365.herokuapp.com/users', {
+    _axios.default.post('http://localhost:3000/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -43229,7 +43229,7 @@ function (_React$Component) {
 
       var username = localStorage.getItem('user');
 
-      _axios.default.get("https://myflix247365.herokuapp.com/users/".concat(username), {
+      _axios.default.get("http://localhost:3000/users/".concat(username), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -43257,7 +43257,7 @@ function (_React$Component) {
     value: function deleteFavoriteMovie(event, favoriteMovie) {
       event.preventDefault();
 
-      _axios.default.delete("https://myflix247365.herokuapp.com/users/".concat(localStorage.getItem('user'), "/Movies/").concat(favoriteMovie), {
+      _axios.default.delete("http://localhost:3000/users/".concat(localStorage.getItem('user'), "/Movies/").concat(favoriteMovie), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -43387,7 +43387,7 @@ function ProfileUpdate(props) {
       Birthday: birthday
     };
 
-    _axios.default.put("https://myflix247365.herokuapp.com/users/".concat(user), userInfo, {
+    _axios.default.put("http://localhost:3000/users/".concat(user), userInfo, {
       headers: {
         Authorization: "Bearer ".concat(localStorage.getItem('token'))
       }
@@ -43404,7 +43404,7 @@ function ProfileUpdate(props) {
   var handleDelete = function handleDelete(e) {
     e.preventDefault();
 
-    _axios.default.delete("https://myflix247365.herokuapp.com/users/".concat(user), {
+    _axios.default.delete("http://localhost:3000/users/".concat(user), {
       headers: {
         Authorization: "Bearer ".concat(localStorage.getItem('token'))
       }
@@ -43629,7 +43629,7 @@ function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get('https://myflix247365.herokuapp.com/movies', {
+      _axios.default.get('http://localhost:3000/movies', {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -43951,7 +43951,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50120" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56722" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
