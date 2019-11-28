@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import "./movie-view.scss"
 
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -62,4 +63,6 @@ MovieView.propTypes = {
     }),
     ImagePath: PropTypes.string
   }).isRequired,
-};  
+};
+
+export default connect(({ movies }) => ({ movies }))(MovieView);

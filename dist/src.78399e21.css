@@ -1,7 +1,7 @@
 .search-bar {
   position: absolute;
   height: 30px;
-  width: 200px;
+  width: 350px;
   top: 110px;
   right: 105px;
 }
@@ -125,7 +125,6 @@ body {
 }
 .profile-name {
   text-align: center;
-  text-decoration: underline;
 }
 
 .profile-name {

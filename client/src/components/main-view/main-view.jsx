@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //#0
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -60,12 +60,22 @@ export class MainView extends React.Component {
       });
   }
 
+  getUser(token) {
+    axios.get(`http://localhost:3000/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      this.props.setUser(response.data);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
       user: authData.user.Username
     });
-
+    this.props.setUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -120,7 +130,7 @@ export class MainView extends React.Component {
             </Link>
           </div>
           <div className="header">
-            <h1>myFlix</h1>
+            <h1>MyFlix!</h1>
           </div>
           <Row>
             <Route exact path="/" render={() => {
@@ -149,7 +159,7 @@ let mapStateToProps = state => {
   return { movies: state.movies }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
 
 MainView.propTypes = {
   //none

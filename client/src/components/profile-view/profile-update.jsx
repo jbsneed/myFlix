@@ -4,6 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./profile-view.scss"
 
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  const { movies } = state;
+  return { movies };
+}
+
 export function ProfileUpdate(props) {
   const [username, setNewUsername] = useState('');
   const [password, setNewPassword] = useState('');
@@ -79,3 +86,5 @@ export function ProfileUpdate(props) {
 
 ProfileUpdate.propTypes = {
 };
+
+export default connect(mapStateToProps)(ProfileUpdate);

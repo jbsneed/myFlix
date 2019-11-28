@@ -6,6 +6,8 @@ import "./genre-view.scss"
 
 import { Link } from "react-router-dom";
 
+import { connect } from 'react-redux';
+
 
 export class GenreView extends React.Component {
   constructor() {
@@ -43,3 +45,5 @@ GenreView.propTypes = {
   }).isRequired,
   onClick: PropTypes.func.isRequired
 };
+
+export default connect(({ movies }) => ({ movies }))(GenreView);

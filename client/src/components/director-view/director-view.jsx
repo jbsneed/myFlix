@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import "./director-view.scss"
 
 import { Link } from "react-router-dom";
-
+import { connect } from 'react-redux';
 
 export class DirectorView extends React.Component {
   constructor() {
@@ -47,3 +47,5 @@ DirectorView.propTypes = {
   }).isRequired,
   onClick: PropTypes.func.isRequired
 };
+
+export default connect(({ movies }) => ({ movies }))(DirectorView);

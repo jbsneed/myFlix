@@ -8,6 +8,13 @@ import './profile-view.scss'
 
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  const { movies } = state;
+  return { movies };
+};
+
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -76,7 +83,7 @@ export class ProfileView extends React.Component {
       <div className="profile-view">
         <Card className="profile-view-card" style={{ width: '100%' }}>
           <Card.Body>
-            <Card.Title className="profile-name">~ {username} ~</Card.Title>
+            <Card.Title className="profile-name">{username} </Card.Title>
             <ListGroup.Item>Password: ********</ListGroup.Item>
             <ListGroup.Item>Email: {email}</ListGroup.Item>
             <ListGroup.Item>Birthday: {birthday}</ListGroup.Item>
@@ -112,4 +119,6 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(ProfileView);
 

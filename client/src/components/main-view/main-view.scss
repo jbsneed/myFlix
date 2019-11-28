@@ -10,10 +10,10 @@ body{
 }
 
 .navigation-btn-group{
-display: flex;
-flex-direction: row-reverse;
-margin:5px;
-padding:10px;
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 5px;
+  padding: 10px;
 }
 
 .nav-btn{
@@ -23,6 +23,6 @@ padding:10px;
 
 .header{
   text-align: center;
-  display: wrap;
+  display:wrap;
   color: $white;
 }

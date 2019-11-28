@@ -29,7 +29,7 @@ export class MovieCard extends React.Component {
 
     return (
       <Card className="movie-card" style={{ width: '30%' }}>
-        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Img className="card-img-top" variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Link to={`/movies/${movie._id}`}>
