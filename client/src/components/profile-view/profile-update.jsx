@@ -27,7 +27,7 @@ export function ProfileUpdate(props) {
       Email: email,
       Birthday: birthday
     };
-    axios.put(`http://localhost:3000/users/${user}`, userInfo,
+    axios.put(`https://myflix247365.herokuapp.com/users/${user}`, userInfo,
       { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
     )
       .then(response => {
@@ -43,7 +43,7 @@ export function ProfileUpdate(props) {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:3000/users/${user}`, {
+    axios.delete(`https://myflix247365.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(response => {
       alert('Your account has been deleted.');
