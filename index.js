@@ -34,7 +34,7 @@ app.use(express.static('public'));
 app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 app.get('/client/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-})
+});
 app.use(cors());
 app.use(function (err, req, res, next) {
   console.error(err.stack);
