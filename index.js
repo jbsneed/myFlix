@@ -16,25 +16,21 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
-  useNewUrlParser: true
-});
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+//   useNewUrlParser: true
+// });
 
-// mongoose.connect(
-//   'mongodb+srv://myFlixDBadmin:Jamey02!@cluster0-dlnqj.mongodb.net/myFlixDB?retryWrites=true&w=majority',
-//   {
-//     useNewUrlParser: true
-//   }
-// );
+mongoose.connect(
+  'mongodb+srv://myFlixDBadmin:Jamey02!@cluster0-dlnqj.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true
+  }
+);
 
 const app = express();
 app.use(bodyParser.json());
 app.use(morgan('common'));
-app.use(express.static('public'));
-app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
-app.get('/client/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+app.use(express.static(path.resolve('dist')));
 app.use(cors());
 app.use(function (err, req, res, next) {
   console.error(err.stack);

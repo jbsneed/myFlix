@@ -14,7 +14,7 @@ export class MovieCard extends React.Component {
 
     function addMovieToFavorites(e) {
       e.preventDefault();
-      axios.post(`https://myflix247365.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${movie._id}`, {
+      axios.post(`/users/${localStorage.getItem('user')}/Movies/${movie._id}`, {
         Username: localStorage.getItem('user')
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

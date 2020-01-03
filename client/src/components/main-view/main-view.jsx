@@ -48,7 +48,7 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://myflix247365.herokuapp.com/movies', {
+    axios.get('/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -61,7 +61,7 @@ export class MainView extends React.Component {
   }
 
   getUser(token) {
-    axios.get(`https://myflix247365.herokuapp.com/users/${username}`, {
+    axios.get(`/users/${username}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
       this.props.setUser(response.data);
