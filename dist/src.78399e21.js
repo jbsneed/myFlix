@@ -43282,7 +43282,7 @@ function (_React$Component) {
 
       var username = localStorage.getItem('user');
 
-      _axios.default.get("/users/".concat(username), {
+      _axios.default.get("https://myflix247365.herokuapp.com/users/".concat(username), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -43343,7 +43343,7 @@ function (_React$Component) {
         }
       }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
         className: "profile-name"
-      }, username, " "), _react.default.createElement(_ListGroup.default.Item, null, "Password: ********"), _react.default.createElement(_ListGroup.default.Item, null, "Email: ", email), _react.default.createElement(_ListGroup.default.Item, null, "Birthday: ", birthday), _react.default.createElement(_ListGroup.default.Item, null, " Favorite Movies:", _react.default.createElement("div", null, favoriteMovies.length === 0 && _react.default.createElement("div", {
+      }, username, " "), _react.default.createElement(_ListGroup.default.Item, null, "Email: ", email), _react.default.createElement(_ListGroup.default.Item, null, "Birthday: ", birthday), _react.default.createElement(_ListGroup.default.Item, null, " Favorite Movies:", _react.default.createElement("div", null, favoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "value"
       }, "You don't have any favorites!"), favoriteMovies.length > 0 && _react.default.createElement("ul", {
         className: "favorite-movies"
@@ -44053,7 +44053,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57854" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49968" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

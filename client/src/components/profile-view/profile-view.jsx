@@ -41,7 +41,7 @@ export class ProfileView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-    axios.get(`/users/${username}`, {
+    axios.get('/users/${username}', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -84,7 +84,6 @@ export class ProfileView extends React.Component {
         <Card className="profile-view-card" style={{ width: '100%' }}>
           <Card.Body>
             <Card.Title className="profile-name">{username} </Card.Title>
-            <ListGroup.Item>Password: ********</ListGroup.Item>
             <ListGroup.Item>Email: {email}</ListGroup.Item>
             <ListGroup.Item>Birthday: {birthday}</ListGroup.Item>
             <ListGroup.Item> Favorite Movies:
